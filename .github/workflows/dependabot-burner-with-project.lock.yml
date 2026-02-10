@@ -19,11 +19,10 @@
 #   gh aw compile
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
-# Bundle open Dependabot PRs by ecosystem and create review issues, using a GitHub project board to track and visualize progress.
 #
-# frontmatter-hash: 3fa73b35365994f247293c7e6ac68fe87e4ef807f4b50393e9257f7d45c9110e
+# frontmatter-hash: 9323bc0ee02be86643fe98bdc6ed598190a3cbe3dbb5c14a647963358bcafc22
 
-name: "Dependabot Burner (with Projects)"
+name: "Dependabot Burner Projects"
 "on":
   schedule:
   - cron: "10 13 * * 6"
@@ -35,10 +34,12 @@ permissions: {}
 concurrency:
   group: "gh-aw-${{ github.workflow }}"
 
-run-name: "Dependabot Burner (with Projects)"
+run-name: "Dependabot Burner Projects"
 
 jobs:
   activation:
+    needs: pre_activation
+    if: needs.pre_activation.outputs.activated == 'true'
     runs-on: ubuntu-slim
     permissions:
       contents: read
@@ -153,12 +154,12 @@ jobs:
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
           cat > /opt/gh-aw/safeoutputs/config.json << 'EOF'
-          {"create_issue":{"max":10},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":50}}
+          {"create_issue":{"max":1},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":10}}
           EOF
           cat > /opt/gh-aw/safeoutputs/tools.json << 'EOF'
           [
             {
-              "description": "Create a new GitHub issue for tracking bugs, feature requests, or tasks. Use this for actionable work items that need assignment, labeling, and status tracking. For reports, announcements, or status updates that don't require task tracking, use create_discussion instead. CONSTRAINTS: Maximum 10 issue(s) can be created. Title will be prefixed with \"[dependabot-burner] \". Assignees [copilot] will be automatically assigned.",
+              "description": "Create a new GitHub issue for tracking bugs, feature requests, or tasks. Use this for actionable work items that need assignment, labeling, and status tracking. For reports, announcements, or status updates that don't require task tracking, use create_discussion instead. CONSTRAINTS: Maximum 1 issue(s) can be created. Title will be prefixed with \"[dependabot-burner] \".",
               "inputSchema": {
                 "additionalProperties": false,
                 "properties": {
@@ -613,7 +614,7 @@ jobs:
               version: "",
               agent_version: "0.0.405",
               cli_version: "v0.42.17",
-              workflow_name: "Dependabot Burner (with Projects)",
+              workflow_name: "Dependabot Burner Projects",
               experimental: false,
               supports_tools_allowlist: true,
               supports_http_transport: true,
@@ -961,7 +962,7 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
           GH_AW_NOOP_MAX: 1
-          GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+          GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -974,7 +975,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+          GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -987,7 +988,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+          GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.agent.outputs.secret_verification_result }}
@@ -1004,7 +1005,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+          GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
@@ -1024,7 +1025,7 @@ jobs:
           GH_AW_COMMENT_ID: ${{ needs.activation.outputs.comment_id }}
           GH_AW_COMMENT_REPO: ${{ needs.activation.outputs.comment_repo }}
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+          GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_DETECTION_CONCLUSION: ${{ needs.detection.result }}
         with:
@@ -1070,8 +1071,8 @@ jobs:
       - name: Setup threat detection
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
-          WORKFLOW_NAME: "Dependabot Burner (with Projects)"
-          WORKFLOW_DESCRIPTION: "Bundle open Dependabot PRs by ecosystem and create review issues, using a GitHub project board to track and visualize progress."
+          WORKFLOW_NAME: "Dependabot Burner Projects"
+          WORKFLOW_DESCRIPTION: "No description provided"
           HAS_PATCH: ${{ needs.agent.outputs.has_patch }}
         with:
           script: |
@@ -1136,6 +1137,28 @@ jobs:
           path: /tmp/gh-aw/threat-detection/detection.log
           if-no-files-found: ignore
 
+  pre_activation:
+    runs-on: ubuntu-slim
+    outputs:
+      activated: ${{ steps.check_membership.outputs.is_team_member == 'true' }}
+    steps:
+      - name: Setup Scripts
+        uses: github/gh-aw/actions/setup@7a970851c1090295e55a16e549c61ba1ce227f16 # v0.42.17
+        with:
+          destination: /opt/gh-aw/actions
+      - name: Check team membership for workflow
+        id: check_membership
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          GH_AW_REQUIRED_ROLES: admin,maintainer,write
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+            setupGlobals(core, github, context, exec, io);
+            const { main } = require('/opt/gh-aw/actions/check_membership.cjs');
+            await main();
+
   safe_outputs:
     needs:
       - agent
@@ -1149,7 +1172,7 @@ jobs:
     env:
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_WORKFLOW_ID: "dependabot-burner-with-project"
-      GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
+      GH_AW_WORKFLOW_NAME: "Dependabot Burner Projects"
     outputs:
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}
@@ -1177,8 +1200,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"assignees\":[\"copilot\"],\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":50,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
-          GH_AW_ASSIGN_COPILOT: "true"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"max\":1,\"title_prefix\":\"[dependabot-burner] \"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
           GH_AW_PROJECT_URL: "https://github.com/orgs/my-mona-org/projects/1"
           GH_AW_PROJECT_GITHUB_TOKEN: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
         with:
@@ -1187,17 +1209,5 @@ jobs:
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
             const { main } = require('/opt/gh-aw/actions/safe_output_handler_manager.cjs');
-            await main();
-      - name: Assign Copilot to created issues
-        if: steps.process_safe_outputs.outputs.issues_to_assign_copilot != ''
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
-        env:
-          GH_AW_ISSUES_TO_ASSIGN_COPILOT: ${{ steps.process_safe_outputs.outputs.issues_to_assign_copilot }}
-        with:
-          github-token: ${{ secrets.GH_AW_AGENT_TOKEN || secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
-          script: |
-            const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
-            setupGlobals(core, github, context, exec, io);
-            const { main } = require('/opt/gh-aw/actions/assign_copilot_to_created_issues.cjs');
             await main();
 
