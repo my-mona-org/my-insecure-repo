@@ -10,6 +10,7 @@ tools:
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-burner] '
+    max: 10
   update-project:
     project: "https://github.com/orgs/my-mona-org/projects/1"
   create-project-status-update:

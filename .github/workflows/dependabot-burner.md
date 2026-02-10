@@ -9,6 +9,7 @@ tools:
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-burner] '
+    max: 10
 ---
 # Dependabot Burner
 

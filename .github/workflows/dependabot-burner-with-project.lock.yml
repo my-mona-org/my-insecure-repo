@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: 9ad853d63734c7312b7076b165feafc90936ee8d5c059fa79aaf6dc57cf7a032
+# frontmatter-hash: c0504d0cf1ca12c1946e9002b2e38b3e77b43c20c3f7b41cb2d67ed8aea517d7
 
 name: "Dependabot Burner Projects"
 "on":
@@ -154,12 +154,12 @@ jobs:
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
           cat > /opt/gh-aw/safeoutputs/config.json << 'EOF'
-          {"create_issue":{"max":1},"create_project_status_update":{"max":10},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":10}}
+          {"create_issue":{"max":10},"create_project_status_update":{"max":10},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":10}}
           EOF
           cat > /opt/gh-aw/safeoutputs/tools.json << 'EOF'
           [
             {
-              "description": "Create a new GitHub issue for tracking bugs, feature requests, or tasks. Use this for actionable work items that need assignment, labeling, and status tracking. For reports, announcements, or status updates that don't require task tracking, use create_discussion instead. CONSTRAINTS: Maximum 1 issue(s) can be created. Title will be prefixed with \"[dependabot-burner] \".",
+              "description": "Create a new GitHub issue for tracking bugs, feature requests, or tasks. Use this for actionable work items that need assignment, labeling, and status tracking. For reports, announcements, or status updates that don't require task tracking, use create_discussion instead. CONSTRAINTS: Maximum 10 issue(s) can be created. Title will be prefixed with \"[dependabot-burner] \".",
               "inputSchema": {
                 "additionalProperties": false,
                 "properties": {
@@ -1283,7 +1283,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"max\":1,\"title_prefix\":\"[dependabot-burner] \"},\"create_project_status_update\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"create_project_status_update\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
           GH_AW_PROJECT_URL: "https://github.com/orgs/my-mona-org/projects/1"
           GH_AW_PROJECT_GITHUB_TOKEN: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
         with:
