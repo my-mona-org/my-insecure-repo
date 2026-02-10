@@ -25,4 +25,4 @@ safe-outputs:
   - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
   - **Done**: bundle issues closed, and their PRs merged/closed.
   - Only move cards when PRs are linked to a bundle issue.
-- Post a project status update with counts for opened/merged/closed/remaining PRs.
+- Post a project status update with PR counts: opened, merged/closed, remaining.
