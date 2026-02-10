@@ -15,6 +15,7 @@ tools:
     allowed: [search_pull_requests]
 
 safe-outputs:
+  github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
   create-issue:
     title-prefix: '[dependabot-burner] '
     assignees: ['copilot']
