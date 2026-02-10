@@ -17,13 +17,11 @@ tools:
     toolsets: [default, projects]
 
 safe-outputs:
-  github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
   create-issue:
     title-prefix: '[dependabot-burner] '
     assignees: ['copilot']
     max: 10
   update-project:
-    github-token: ${{ secrets.PROJECT_GITHUB_TOKEN }}
     project: "https://github.com/orgs/my-mona-org/projects/1"
     max: 50
 

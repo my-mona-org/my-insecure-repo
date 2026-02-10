@@ -21,7 +21,7 @@
 #
 # Bundle open Dependabot PRs by ecosystem and create review issues, using a GitHub project board to track and visualize progress.
 #
-# frontmatter-hash: f7094a32764e84b60acc96101337a8fae545d00d6815073fd5f2d5b51e1a2d1f
+# frontmatter-hash: 3fa73b35365994f247293c7e6ac68fe87e4ef807f4b50393e9257f7d45c9110e
 
 name: "Dependabot Burner (with Projects)"
 "on":
@@ -118,9 +118,9 @@ jobs:
           github.event.pull_request
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
-          GH_TOKEN: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_AW_GITHUB_MCP_SERVER_TOKEN || secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_MCP_SERVER_TOKEN || secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -825,8 +825,7 @@ jobs:
             const { main } = require('/opt/gh-aw/actions/redact_secrets.cjs');
             await main();
         env:
-          GH_AW_SECRET_NAMES: 'AGENT_GITHUB_TOKEN,COPILOT_GITHUB_TOKEN,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN'
-          SECRET_AGENT_GITHUB_TOKEN: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          GH_AW_SECRET_NAMES: 'COPILOT_GITHUB_TOKEN,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN'
           SECRET_COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           SECRET_GH_AW_GITHUB_MCP_SERVER_TOKEN: ${{ secrets.GH_AW_GITHUB_MCP_SERVER_TOKEN }}
           SECRET_GH_AW_GITHUB_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN }}
@@ -964,7 +963,7 @@ jobs:
           GH_AW_NOOP_MAX: 1
           GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -977,7 +976,7 @@ jobs:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
           GH_AW_WORKFLOW_NAME: "Dependabot Burner (with Projects)"
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -994,7 +993,7 @@ jobs:
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.agent.outputs.secret_verification_result }}
           GH_AW_CHECKOUT_PR_SUCCESS: ${{ needs.agent.outputs.checkout_pr_success }}
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -1011,7 +1010,7 @@ jobs:
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
           GH_AW_NOOP_REPORT_AS_ISSUE: "true"
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -1029,7 +1028,7 @@ jobs:
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_DETECTION_CONCLUSION: ${{ needs.detection.result }}
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -1178,12 +1177,12 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"assignees\":[\"copilot\"],\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"github-token\":\"${{ secrets.PROJECT_GITHUB_TOKEN }}\",\"max\":50,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"assignees\":[\"copilot\"],\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":50,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
           GH_AW_ASSIGN_COPILOT: "true"
           GH_AW_PROJECT_URL: "https://github.com/orgs/my-mona-org/projects/1"
-          GH_AW_PROJECT_GITHUB_TOKEN: ${{ secrets.PROJECT_GITHUB_TOKEN }}
+          GH_AW_PROJECT_GITHUB_TOKEN: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
         with:
-          github-token: ${{ secrets.PROJECT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
@@ -1195,7 +1194,7 @@ jobs:
         env:
           GH_AW_ISSUES_TO_ASSIGN_COPILOT: ${{ steps.process_safe_outputs.outputs.issues_to_assign_copilot }}
         with:
-          github-token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_AW_AGENT_TOKEN || secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
