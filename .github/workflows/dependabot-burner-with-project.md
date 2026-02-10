@@ -12,6 +12,8 @@ safe-outputs:
     title-prefix: '[dependabot-burner] '
   update-project:
     project: "https://github.com/orgs/my-mona-org/projects/1"
+  create-project-status-update:
+    project: "https://github.com/orgs/my-mona-org/projects/1"
 ---
 # Dependabot Burner Projects
 
@@ -23,3 +25,4 @@ safe-outputs:
   - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
   - **Done**: bundle issues closed, and their PRs merged/closed.
   - Only move cards when PRs are linked to a bundle issue.
+- Post a project status update that summarizes how many Dependabot PRs were burned in this run (opened, merged/closed, and remaining).
