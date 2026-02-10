@@ -1,44 +1,49 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.1.5)
-      actionpack (= 5.1.5)
+    actioncable (5.2.8.1)
+      actionpack (= 5.2.8.1)
       nio4r (~> 2.0)
-      websocket-driver (~> 0.6.1)
-    actionmailer (5.1.5)
-      actionpack (= 5.1.5)
-      actionview (= 5.1.5)
-      activejob (= 5.1.5)
+      websocket-driver (>= 0.6.1)
+    actionmailer (5.2.8.1)
+      actionpack (= 5.2.8.1)
+      actionview (= 5.2.8.1)
+      activejob (= 5.2.8.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.1.5)
-      actionview (= 5.1.5)
-      activesupport (= 5.1.5)
-      rack (~> 2.0)
+    actionpack (5.2.8.1)
+      actionview (= 5.2.8.1)
+      activesupport (= 5.2.8.1)
+      rack (~> 2.0, >= 2.0.8)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.1.5)
-      activesupport (= 5.1.5)
+    actionview (5.2.8.1)
+      activesupport (= 5.2.8.1)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.1.5)
-      activesupport (= 5.1.5)
+    activejob (5.2.8.1)
+      activesupport (= 5.2.8.1)
       globalid (>= 0.3.6)
-    activemodel (5.1.5)
-      activesupport (= 5.1.5)
-    activerecord (5.1.5)
-      activemodel (= 5.1.5)
-      activesupport (= 5.1.5)
-      arel (~> 8.0)
-    activesupport (5.1.5)
+    activemodel (5.2.8.1)
+      activesupport (= 5.2.8.1)
+    activerecord (5.2.8.1)
+      activemodel (= 5.2.8.1)
+      activesupport (= 5.2.8.1)
+      arel (>= 9.0)
+    activestorage (5.2.8.1)
+      actionpack (= 5.2.8.1)
+      activerecord (= 5.2.8.1)
+      marcel (~> 1.0.0)
+    activesupport (5.2.8.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (~> 0.7)
+      i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    arel (8.0.0)
+    arel (9.0.0)
+    base64 (0.3.0)
     builder (3.3.0)
     concurrent-ruby (1.3.6)
     crass (1.0.6)
@@ -54,7 +59,7 @@ GEM
     ffi (1.17.3-x86_64-linux-musl)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    i18n (0.9.5)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     logger (1.7.0)
     loofah (2.25.0)
@@ -66,6 +71,7 @@ GEM
       net-imap
       net-pop
       net-smtp
+    marcel (1.0.4)
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.27.0)
@@ -99,17 +105,18 @@ GEM
     rack (2.2.21)
     rack-test (2.2.0)
       rack (>= 1.3)
-    rails (5.1.5)
-      actioncable (= 5.1.5)
-      actionmailer (= 5.1.5)
-      actionpack (= 5.1.5)
-      actionview (= 5.1.5)
-      activejob (= 5.1.5)
-      activemodel (= 5.1.5)
-      activerecord (= 5.1.5)
-      activesupport (= 5.1.5)
+    rails (5.2.8.1)
+      actioncable (= 5.2.8.1)
+      actionmailer (= 5.2.8.1)
+      actionpack (= 5.2.8.1)
+      actionview (= 5.2.8.1)
+      activejob (= 5.2.8.1)
+      activemodel (= 5.2.8.1)
+      activerecord (= 5.2.8.1)
+      activestorage (= 5.2.8.1)
+      activesupport (= 5.2.8.1)
       bundler (>= 1.3.0)
-      railties (= 5.1.5)
+      railties (= 5.2.8.1)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
@@ -118,27 +125,28 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    railties (5.1.5)
-      actionpack (= 5.1.5)
-      activesupport (= 5.1.5)
+    railties (5.2.8.1)
+      actionpack (= 5.2.8.1)
+      activesupport (= 5.2.8.1)
       method_source
       rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
+      thor (>= 0.19.0, < 2.0)
     rake (13.3.1)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
       rack (>= 2.2.4, < 4)
-    sprockets-rails (3.2.2)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.5.0)
     thread_safe (0.3.6)
     timeout (0.6.0)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    websocket-driver (0.6.5)
+    websocket-driver (0.8.0)
+      base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
 
@@ -153,22 +161,23 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  actionpack (= 5.1.5)
   ffi (= 1.17.3)
   nokogiri (= 1.19.0)
   rack (= 2.2.21)
-  rails (= 5.1.5)
+  rails (= 5.2.8.1)
 
 CHECKSUMS
-  actioncable (5.1.5) sha256=877ff84da386dafdd5d8fc5f8fccd2d87be59cbbfdd2dcac378fb3672c3eb554
-  actionmailer (5.1.5) sha256=9c690209cdd6da82ab335db6195f8179afd5e36ed64a70d63a1c78f34d3150e4
-  actionpack (5.1.5) sha256=ed592c0b6a729bd5b96daa11b7a9cc9f930c5fd69650184519d3957e0063eeaa
-  actionview (5.1.5) sha256=47ac593df4dc8b1e9e80be8118c61dba0046dc53dd470eecdab1af33233bcc95
-  activejob (5.1.5) sha256=e063e2042173723a5b135efbe9c4c1cd9a0cf49b28047ae8ef7113b8fc43ecef
-  activemodel (5.1.5) sha256=dddd51d8682d96c14adc5b9064b8c8ed544e4de8bfe69845d80464c2e78a61fe
-  activerecord (5.1.5) sha256=fc11c06b9cd40b9871c6a82d6497bb0755991846fb3712a1433ee5ad23fc3572
-  activesupport (5.1.5) sha256=d9b548c63c547b8d6b4c98ca6f8a61d21833ea33a09e7a2295156344d2996c5a
-  arel (8.0.0) sha256=f4777aabfe12a9e99713674240971d7f1f515cc258d561cd2dc2c06bd8c2805b
+  actioncable (5.2.8.1) sha256=b9d96da7c7ed7fb84b4f5f82adfc9356173ae6c59c80cd823eaeb161278cabec
+  actionmailer (5.2.8.1) sha256=fdcafaa5ebb78f539487fc81861a29a16a184e6ef73cbacffcbcfcb2919618f4
+  actionpack (5.2.8.1) sha256=637be8a2434501d07de9dfec7a043cfa8f3c99128d54e4c9d0f1a7a75bf91b57
+  actionview (5.2.8.1) sha256=b43a25fcb2e61a9fe1bf2dd721db5521bda9e1c226e5c3b041036bb13d047319
+  activejob (5.2.8.1) sha256=9fce309fa931a6431d5632ef4e775265cbc4044baf904828f360f884f73cc08b
+  activemodel (5.2.8.1) sha256=2fad202735ec6b5c6508b1691ac2e44e4f9f22a859c0f727cdef107ae5ea5e6f
+  activerecord (5.2.8.1) sha256=0a288fe88b1032aa688dd9192f4ec3ac3315efc7e09fdce9b4c510bc1bc7684a
+  activestorage (5.2.8.1) sha256=0a653aa439a68150664fdc326e21cdae888a9a92741f960e6c23ecc1776b7462
+  activesupport (5.2.8.1) sha256=f0498c616e1b243c7b56d67920c389f959c186ad7031569e80335b42e1d22564
+  arel (9.0.0) sha256=60da926cea65e70817cc5a3b292c37af556b88d542276ec6332e983c2be567ca
+  base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
@@ -183,10 +192,11 @@ CHECKSUMS
   ffi (1.17.3-x86_64-linux-gnu) sha256=3746b01f677aae7b16dc1acb7cb3cc17b3e35bdae7676a3f568153fb0e2c887f
   ffi (1.17.3-x86_64-linux-musl) sha256=086b221c3a68320b7564066f46fed23449a44f7a1935f1fe5a245bd89d9aea56
   globalid (1.1.0) sha256=b337e1746f0c8cb0a6c918234b03a1ddeb4966206ce288fbb57779f59b2d154f
-  i18n (0.9.5) sha256=43a58b55056ef171cae9b35df8aa5dee22d3a782f8a9bdd0ec8e8d36cfdf180d
+  i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   loofah (2.25.0) sha256=df5ed7ac3bac6a4ec802df3877ee5cc86d027299f8952e6243b3dac446b060e6
   mail (2.9.0) sha256=6fa6673ecd71c60c2d996260f9ee3dd387d4673b8169b502134659ece6d34941
+  marcel (1.0.4) sha256=0d5649feb64b8f19f3d3468b96c680bae9746335d02194270287868a661516a4
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
@@ -206,18 +216,18 @@ CHECKSUMS
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rack (2.2.21) sha256=14e2f72f0765455fe424ff601588ac5ce84e95784f59e99251ffe1527152f739
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
-  rails (5.1.5) sha256=fee9771fc53f3060875267a6789aea9e35975e5c344ff5c3175e27be92a01561
+  rails (5.2.8.1) sha256=cf18751a5e603cc1996536de8109459da9998c843dc5381ab8f87680a793c4cb
   rails-dom-testing (2.3.0) sha256=8acc7953a7b911ca44588bf08737bc16719f431a1cc3091a292bca7317925c1d
   rails-html-sanitizer (1.6.2) sha256=35fce2ca8242da8775c83b6ba9c1bcaad6751d9eb73c1abaa8403475ab89a560
-  railties (5.1.5) sha256=fa9747717cc279d4dce56a7a75a230dfce8f166a5be120bc2f2f38b91925aa43
+  railties (5.2.8.1) sha256=62bb4817ec39be0bff5c14e3b485e29ebf8abebed7a68fc8c9caaf270baa3071
   rake (13.3.1) sha256=8c9e89d09f66a26a01264e7e3480ec0607f0c497a861ef16063604b1b08eb19c
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
-  sprockets-rails (3.2.2) sha256=62862bce136e31d7497eededde5f7730d4096bc8ef33ef7037c41423ccf89557
+  sprockets-rails (3.4.2) sha256=36d6327757ccf7460a00d1d52b2d5ef0019a4670503046a129fa1fb1300931ad
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   thread_safe (0.3.6) sha256=9ed7072821b51c57e8d6b7011a8e282e25aeea3a4065eab326e43f66f063b05a
   timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
   tzinfo (1.2.11) sha256=6501f6a12175ca0243118b83f7c7c2b7978aaec7a0980550a124d007ad6361b6
-  websocket-driver (0.6.5) sha256=b4a4e0c75eae9e85ceb248d4dc13519da581452767dcd5126c1452ea052183a4
+  websocket-driver (0.8.0) sha256=ed0dba4b943c22f17f9a734817e808bc84cdce6a7e22045f5315aa57676d4962
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
 
 BUNDLED WITH
