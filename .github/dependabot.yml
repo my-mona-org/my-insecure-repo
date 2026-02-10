@@ -1,0 +1,36 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/nodejs-app"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "pip"
+    directory: "/python-service"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "bundler"
+    directory: "/ruby-webapp"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "maven"
+    directory: "/java-api"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "gomod"
+    directory: "/golang-microservice"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    open-pull-requests-limit: 10
