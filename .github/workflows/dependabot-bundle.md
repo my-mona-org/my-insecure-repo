@@ -23,6 +23,9 @@ tools:
 safe-outputs:
   create-issue:
     max: 10
+  assign-to-agent:
+    allowed: [copilot]
+    max: 10
 ---
 
 # Dependabot Bundle Issue Creator
@@ -89,10 +92,10 @@ This issue tracks all open Dependabot PRs for the **{ecosystem}** ecosystem in t
 3. Group PRs by their ecosystem-directory combination
 
 4. For each group with at least one PR:
-   - Create an issue using safe outputs
+   - Create an issue using safe outputs with type: "create_issue"
    - Format the issue with clear sections
    - Include links to all PRs in the group
-   - Assign to @copilot
+   - Assign the issue to the Copilot agent using safe outputs with type: "assign_to_agent"
 
 5. Handle edge cases:
    - If no open Dependabot PRs exist, output a message stating this
