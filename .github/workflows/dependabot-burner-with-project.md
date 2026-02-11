@@ -20,12 +20,14 @@ safe-outputs:
 ---
 # Dependabot Burner Projects
 
-- Find all open Dependabot PRs and add them to the project.
+- Find all open Dependabot PRs.
 - Create bundle issues, each for exactly **one runtime + one manifest file**.
+- **Add the newly created bundle issues to the project board** (not the individual PRs).
+- Use temporary IDs for the bundle issues you create (e.g., `bundle_pip_python`, `bundle_npm_nodejs`) so you can reference them in update_project calls.
 - Project board status mapping:
   - **Todo**: newly created bundle issues (grouped by runtime+manifest).
   - **In Progress**: bundle issues assigned.
   - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
   - **Done**: bundle issues closed, and their PRs merged/closed.
-  - Only move cards when PRs are linked to a bundle issue.
+- Note: The project board tracks bundle issues, not individual PRs. Only update project item status when the bundle issue status changes.
 - Post a project status update with PR counts: opened, merged/closed, remaining.
