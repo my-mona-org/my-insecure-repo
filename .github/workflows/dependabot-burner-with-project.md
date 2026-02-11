@@ -29,4 +29,5 @@ safe-outputs:
   - **In Progress**: bundle issues assigned.
   - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
   - **Done**: bundle issues closed, and their PRs merged/closed.
+- Note: The project board tracks bundle issues, not individual PRs. Only update project item status when the bundle issue status changes.
 - Post a project status update with PR counts: opened, merged/closed, remaining.
