@@ -13,5 +13,5 @@ safe-outputs:
 ---
 # Dependabot Burner
 
-- Find all open Dependabot PRs and add them to the project.
+- Find all open Dependabot PRs.
 - Create bundle issues, each for exactly **one runtime + one manifest file**.
