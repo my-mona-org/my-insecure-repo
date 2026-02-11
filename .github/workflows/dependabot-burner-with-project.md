@@ -23,7 +23,7 @@ safe-outputs:
 - Find all open Dependabot PRs.
 - Create bundle issues, each for exactly **one runtime + one manifest file**.
 - **Add the newly created bundle issues to the project board** (not the individual PRs).
-- Use temporary IDs for the bundle issues you create so you can reference them in update_project calls.
+- Use temporary IDs for the bundle issues you create (e.g., `bundle_pip_python`, `bundle_npm_nodejs`) so you can reference them in update_project calls.
 - Project board status mapping:
   - **Todo**: newly created bundle issues (grouped by runtime+manifest).
   - **In Progress**: bundle issues assigned.
