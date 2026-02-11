@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: c0504d0cf1ca12c1946e9002b2e38b3e77b43c20c3f7b41cb2d67ed8aea517d7
+# frontmatter-hash: ae988a519a4d1b1d91317d76040af9ae2f60890d32c453a5c6c07a00edca0a50
 
 name: "Dependabot Burner Projects"
 "on":
