@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: dcb378671c74830bcab3107ac3abffe26a836a43757476bedd2bd23939470c57
+# frontmatter-hash: 708c4f98a2cf5483a81d4cec72dcc578be0c12bf095d67f176ef8189220aec96
 
 name: "Dependabot Project Board Sync"
 "on":
@@ -28,7 +28,6 @@ name: "Dependabot Project Board Sync"
     # zizmor: ignore[dangerous-triggers] - workflow_run trigger is secured with role and fork validation
     branches:
     - main
-    - master
     types:
     - completed
     workflows:

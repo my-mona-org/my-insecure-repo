@@ -7,7 +7,6 @@ on:
       - completed
     branches:
       - main
-      - master
 permissions:
   contents: read
   issues: read
