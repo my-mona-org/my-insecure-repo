@@ -7,6 +7,13 @@ on:
       - completed
     branches:
       - main
+  issues:
+    types:
+      - assigned
+      - unassigned
+  pull_request:
+    types:
+      - review_requested
 permissions:
   contents: read
   issues: read
@@ -22,10 +29,17 @@ safe-outputs:
 ---
 # Dependabot Project Board Sync
 
-- Run only when the Dependabot Burner workflow completed successfully; otherwise write a noop message.
-- Find open bundle issues created by the Dependabot Burner workflow:
-  - Title starts with "Bundle:" and label is "dependencies".
-  - Prefer issues created in the workflow_run time window (started_at to completed_at).
-  - If none are found in the time window, fall back to all open bundle issues.
-- Add each bundle issue to the project board with Status "Todo" if the item is missing; do not override an existing Status.
-- Post a project status update summarizing bundle count and Dependabot PR counts (open, merged/closed, remaining). Include a short table listing runtime, manifest, and PR count per bundle issue.
+- **Always**:
+  - **Bundle issue** = open issue with title starting "Bundle:" and label "dependencies".
+  - Ensure bundle is on project; if missing, add with **Status "Todo"** (do not override existing **Status**).
+  - Post **status update**: bundle count, Dependabot PR counts, short table (runtime, manifest, PR count).
+- **workflow_run**:
+  - Only proceed when Dependabot Burner succeeded; else noop.
+  - Prefer bundles created between started_at and completed_at; fallback to all open bundles.
+- **issues** (assigned/unassigned):
+  - Only act on bundle issues; else noop.
+  - assigned => **Status "In Progress"** unless already **"Review Required"** or **"Done"**.
+  - unassigned => **Status "Todo"** only if current Status is **"In Progress"**.
+- **pull_request** (review_requested):
+  - Only act on PRs linked to an open bundle issue; else noop.
+  - Set linked bundle **Status "Review Required"** unless already **"Done"**.
