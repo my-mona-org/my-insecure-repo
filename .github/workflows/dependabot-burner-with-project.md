@@ -22,9 +22,13 @@ safe-outputs:
 
 - Find all open Dependabot PRs.
 - Create bundle issues, each for exactly **one runtime + one manifest file**.
-- Add the newly created bundle issues to the project board.
-  - **Todo**: newly created bundle issues (grouped by runtime+manifest).
-  - **In Progress**: bundle issues assigned.
-  - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
-  - **Done**: bundle issues closed, and their PRs merged/closed.
-- Post a project status update with PR counts: opened, merged/closed, remaining.
+= Link PRs to their bundle issue.
+- Add newly created bundle issues to the project board.
+- Post a status update with PR counts: opened, merged/closed, remaining.
+
+## Project board statuses:
+
+- Todo – New, unassigned bundle issues.
+- In Progress – Assigned bundle issues.
+- Review Required – Bundle issues that require human action (at least one linked PR is ready, blocked, or needs a decision).
+- Done – Closed bundle issues with all linked PRs merged or closed.
