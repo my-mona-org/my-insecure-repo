@@ -20,8 +20,8 @@ safe-outputs:
 
 - Find all open Dependabot PRs.
 - Create bundle issues, each for exactly **one runtime + one manifest file**.
-= Link PRs to their bundle issue.
-- Add newly created bundle issues to the project board.
+- Link PRs to their bundle issue.
+- Resolve temporary idsof the newly created bundle issues and add them to the project board.
 - Post a status update with PR counts: opened, merged/closed, remaining.
 
 ## Project board statuses:
