@@ -8,15 +8,17 @@ tools:
   github:
     toolsets: [default, projects]
 features:
-  action-tag: ec99734fbadefe28647f8a53c3ec638a63324e53
+  action-tag: 5437ba272d660acf8618b97958d7b51330f639ad
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-burner] '
     max: 10
   update-project:
     project: "https://github.com/orgs/my-mona-org/projects/1"
+    max: 50
   create-project-status-update:
     project: "https://github.com/orgs/my-mona-org/projects/1"
+    max: 1
 ---
 # Dependabot Burner (with Projects)
 

@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: dfe0536d7c1ab419347c250e1b0b4cd5bba08d0173aef25582f15160c3a07f7d
+# frontmatter-hash: 1f80b252acb81e4696715c5b7827a886ad94da4f6e56e61ba54c774c4dd364b3
 
 name: "Dependabot Burner (with Projects)"
 "on":
@@ -48,7 +48,7 @@ jobs:
       comment_repo: ""
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
       - name: Check workflow file timestamps
@@ -89,7 +89,7 @@ jobs:
       secret_verification_result: ${{ steps.validate-secret.outputs.verification_result }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
       - name: Checkout repository
@@ -191,7 +191,7 @@ jobs:
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
           cat > /opt/gh-aw/safeoutputs/config.json << 'GH_AW_SAFE_OUTPUTS_CONFIG_EOF'
-          {"create_issue":{"max":10},"create_project_status_update":{"max":10},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":10}}
+          {"create_issue":{"max":10},"create_project_status_update":{"max":1},"missing_data":{},"missing_tool":{},"noop":{"max":1},"update_project":{"max":50}}
           GH_AW_SAFE_OUTPUTS_CONFIG_EOF
           cat > /opt/gh-aw/safeoutputs/tools.json << 'GH_AW_SAFE_OUTPUTS_TOOLS_EOF'
           [
@@ -220,6 +220,7 @@ jobs:
                   },
                   "temporary_id": {
                     "description": "Unique temporary identifier for referencing this issue before it's created. Format: 'aw_' followed by 12 hex characters (e.g., 'aw_abc123def456'). Use '#aw_ID' in body text to reference other issues by their temporary_id; these are replaced with actual issue numbers after creation.",
+                    "pattern": "^aw_[0-9a-f]{12}$",
                     "type": "string"
                   },
                   "title": {
@@ -306,6 +307,11 @@ jobs:
                     "description": "Optional body for a Projects v2 draft issue (markdown). Only used when content_type is 'draft_issue'.",
                     "type": "string"
                   },
+                  "draft_issue_id": {
+                    "description": "Temporary ID of an existing draft issue to update (e.g., 'aw_abc123def456' or '#aw_abc123def456'). Use this to reference a draft created earlier with a matching temporary_id. When provided, draft_title is not required for updates.",
+                    "pattern": "^#?aw_[0-9a-f]{12}$",
+                    "type": "string"
+                  },
                   "draft_title": {
                     "description": "Title for a Projects v2 draft issue. Required when content_type is 'draft_issue'.",
                     "type": "string"
@@ -361,6 +367,11 @@ jobs:
                   "project": {
                     "description": "Full GitHub project URL (e.g., 'https://github.com/orgs/myorg/projects/42' or 'https://github.com/users/username/projects/5'), or a temporary project ID from a recent create_project call (e.g., '#aw_abc123def456' or 'aw_abc123def456'). Project names or numbers alone are NOT accepted.",
                     "pattern": "^(https://github\\.com/(orgs|users)/[^/]+/projects/\\d+|#?aw_[0-9a-f]{12})$",
+                    "type": "string"
+                  },
+                  "temporary_id": {
+                    "description": "Unique temporary identifier for this draft issue (e.g., 'aw_abc123def456' or '#aw_abc123def456'). Provide this when creating a new draft to enable future updates via draft_issue_id. Format: optional leading '#', then 'aw_' followed by 12 hex characters.",
+                    "pattern": "^#?aw_[0-9a-f]{12}$",
                     "type": "string"
                   },
                   "view": {
@@ -754,6 +765,8 @@ jobs:
           <instructions>
           To create or modify GitHub resources (issues, discussions, pull requests, etc.), you MUST call the appropriate safe output tool. Simply writing content will NOT work - the workflow requires actual tool calls.
           
+          Temporary IDs: Some safe output tools support a temporary ID field (usually named temporary_id) so you can reference newly-created items elsewhere in the SAME agent output (for example, using #aw_abc123def456 in a later body). If nothing needs to reference the item, you can omit temporary_id. If you DO need cross-references/chaining (including draft issue chaining in update_project via temporary_id + draft_issue_id), you MUST provide temporary_id yourself in the strict format: aw_ followed by 12 hexadecimal characters (0-9, a-f), e.g. aw_abc123def456, and reuse that exact value consistently. Do NOT invent other aw_* formats (e.g. aw_bundle_npm001) — downstream steps will reject them.
+          
           Discover available tools from the safeoutputs MCP server.
           
           **Critical**: Tool calls write structured data that downstream jobs process. Without tool calls, follow-up actions will be skipped.
@@ -1019,7 +1032,7 @@ jobs:
       total_count: ${{ steps.missing_tool.outputs.total_count }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent output artifact
@@ -1126,7 +1139,7 @@ jobs:
       success: ${{ steps.parse_results.outputs.success }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent artifacts
@@ -1221,7 +1234,7 @@ jobs:
       activated: ${{ steps.check_membership.outputs.is_team_member == 'true' }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
       - name: Check team membership for workflow
@@ -1258,7 +1271,7 @@ jobs:
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@ec99734fbadefe28647f8a53c3ec638a63324e53 # ec99734fbadefe28647f8a53c3ec638a63324e53
+        uses: github/gh-aw/actions/setup@5437ba272d660acf8618b97958d7b51330f639ad # 5437ba272d660acf8618b97958d7b51330f639ad
         with:
           destination: /opt/gh-aw/actions
           safe-output-projects: 'true'
@@ -1278,7 +1291,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"create_project_status_update\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":10,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_issue\":{\"max\":10,\"title_prefix\":\"[dependabot-burner] \"},\"create_project_status_update\":{\"max\":1,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"},\"missing_data\":{},\"missing_tool\":{},\"update_project\":{\"max\":50,\"project\":\"https://github.com/orgs/my-mona-org/projects/1\"}}"
           GH_AW_PROJECT_URL: "https://github.com/orgs/my-mona-org/projects/1"
           GH_AW_PROJECT_GITHUB_TOKEN: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
         with:
