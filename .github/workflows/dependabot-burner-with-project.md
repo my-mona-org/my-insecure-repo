@@ -7,6 +7,8 @@ permissions:
 tools:
   github:
     toolsets: [default, projects]
+features:
+  action-tag: 74c44cada5c44b6149ac584a274bc78bf2679cdb
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-burner] '
@@ -20,12 +22,6 @@ safe-outputs:
 ---
 # Dependabot Burner (with Projects)
 
-- Find all open Dependabot PRs and add them to the project.
-- Create bundle issues, each for exactly **one runtime + one manifest file**.
+- Find all open Dependabot PRs.
+- Create bundle issues, each for exactly **one runtime + one manifest file** and add them to the project board under "Review Required".
 - Post a project status update with PR counts: opened, merged/closed, remaining.
-
-- Project board status mapping:
-  - **Todo**: newly created bundle issues (grouped by runtime+manifest).
-  - **In Progress**: bundle issues assigned.
-  - **Review Required**: open Dependabot PRs ready for review (tied to a bundle issue).
-  - **Done**: bundle issues closed, and their PRs merged/closed.

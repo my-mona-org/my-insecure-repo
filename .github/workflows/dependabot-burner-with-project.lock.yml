@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: e4f1d04b6b1e903f8c52c3e6d2d8103dde25fa1c1c42cb0159afdf8464133216
+# frontmatter-hash: 6823cd20137a3eca60a2e7fef597c3fe6e0512bee97c7229f5aedf1c48a7ff1a
 
 name: "Dependabot Burner (with Projects)"
 "on":
@@ -47,14 +47,8 @@ jobs:
       comment_id: ""
       comment_repo: ""
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
       - name: Check workflow file timestamps
@@ -94,14 +88,8 @@ jobs:
       output_types: ${{ steps.collect_output.outputs.output_types }}
       secret_verification_result: ${{ steps.validate-secret.outputs.verification_result }}
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
       - name: Checkout repository
@@ -1043,14 +1031,8 @@ jobs:
       tools_reported: ${{ steps.missing_tool.outputs.tools_reported }}
       total_count: ${{ steps.missing_tool.outputs.total_count }}
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent output artifact
@@ -1149,22 +1131,15 @@ jobs:
     needs: agent
     if: needs.agent.outputs.output_types != '' || needs.agent.outputs.has_patch == 'true'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {}
     concurrency:
       group: "gh-aw-copilot-${{ github.workflow }}"
     timeout-minutes: 10
     outputs:
       success: ${{ steps.parse_results.outputs.success }}
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent artifacts
@@ -1255,19 +1230,11 @@ jobs:
 
   pre_activation:
     runs-on: ubuntu-slim
-    permissions:
-      contents: read
     outputs:
       activated: ${{ steps.check_membership.outputs.is_team_member == 'true' }}
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
       - name: Check team membership for workflow
@@ -1303,14 +1270,8 @@ jobs:
       process_safe_outputs_processed_count: ${{ steps.process_safe_outputs.outputs.processed_count }}
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
-      - name: Checkout actions folder
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: |
-            actions
-          persist-credentials: false
       - name: Setup Scripts
-        uses: ./actions/setup
+        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
         with:
           destination: /opt/gh-aw/actions
           safe-output-projects: 'true'
