@@ -7,8 +7,6 @@ permissions:
 tools:
   github:
     toolsets: [default, projects]
-features:
-  action-tag: eab0427db18d90ce4c3acda0f70e6ee721aa7eba
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-burner] '
