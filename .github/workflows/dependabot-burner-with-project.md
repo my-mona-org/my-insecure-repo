@@ -8,6 +8,7 @@ tools:
   github:
     toolsets: [default, projects]
 safe-outputs:
+  github-token: ${{ secrets.GH_AW_PROJECT_GITHUB_TOKEN }}
   create-issue:
     title-prefix: '[dependabot-burner] '
     max: 10
