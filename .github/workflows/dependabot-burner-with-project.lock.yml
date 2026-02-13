@@ -20,7 +20,7 @@
 # For more information: https://github.com/github/gh-aw/blob/main/.github/aw/github-agentic-workflows.md
 #
 #
-# frontmatter-hash: 6823cd20137a3eca60a2e7fef597c3fe6e0512bee97c7229f5aedf1c48a7ff1a
+# frontmatter-hash: 314448dd229491ae88cba4e19c540bdd3101f8205078f8e8a5b0d70203900ab3
 
 name: "Dependabot Burner (with Projects)"
 "on":
@@ -48,7 +48,7 @@ jobs:
       comment_repo: ""
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
       - name: Check workflow file timestamps
@@ -89,7 +89,7 @@ jobs:
       secret_verification_result: ${{ steps.validate-secret.outputs.verification_result }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
       - name: Checkout repository
@@ -308,8 +308,8 @@ jobs:
                     "type": "string"
                   },
                   "draft_issue_id": {
-                    "description": "Temporary ID of an existing draft issue to update (e.g., 'aw_abc123def456' or '#aw_abc123def456'). Use this to reference a draft created earlier with a matching temporary_id. When provided, draft_title is not required for updates.",
-                    "pattern": "^#?aw_[0-9a-f]{12}$",
+                    "description": "Temporary ID of an existing draft issue to update (e.g., 'aw_abc123def456'). Use this to reference a draft created earlier with a matching temporary_id. When provided, draft_title is not required for updates.",
+                    "pattern": "^aw_[0-9a-f]{12}$",
                     "type": "string"
                   },
                   "draft_title": {
@@ -370,8 +370,8 @@ jobs:
                     "type": "string"
                   },
                   "temporary_id": {
-                    "description": "Unique temporary identifier for this draft issue (e.g., 'aw_abc123def456' or '#aw_abc123def456'). Provide this when creating a new draft to enable future updates via draft_issue_id. Format: optional leading '#', then 'aw_' followed by 12 hex characters.",
-                    "pattern": "^#?aw_[0-9a-f]{12}$",
+                    "description": "Unique temporary identifier for this draft issue (e.g., 'aw_abc123def456'). Provide this when creating a new draft to enable future updates via draft_issue_id. Format: 'aw_' followed by 12 hex characters.",
+                    "pattern": "^aw_[0-9a-f]{12}$",
                     "type": "string"
                   },
                   "view": {
@@ -765,7 +765,18 @@ jobs:
           <instructions>
           To create or modify GitHub resources (issues, discussions, pull requests, etc.), you MUST call the appropriate safe output tool. Simply writing content will NOT work - the workflow requires actual tool calls.
           
-          Temporary IDs: Some safe output tools support a temporary ID field (usually named temporary_id) so you can reference newly-created items elsewhere in the SAME agent output (for example, using #aw_abc123def456 in a later body). If nothing needs to reference the item, you can omit temporary_id. If you DO need cross-references/chaining (including draft issue chaining in update_project via temporary_id + draft_issue_id), you MUST provide temporary_id yourself in the strict format: aw_ followed by 12 hexadecimal characters (0-9, a-f), e.g. aw_abc123def456, and reuse that exact value consistently. Do NOT invent other aw_* formats (e.g. aw_bundle_npm001) — downstream steps will reject them.
+          Temporary IDs: Some safe output tools support a temporary ID field (usually named temporary_id) so you can reference newly-created items elsewhere in the SAME agent output (for example, using #aw_abc123def456 in a later body). 
+          
+          **IMPORTANT - temporary_id format rules:**
+          - If you DON'T need to reference the item later, OMIT the temporary_id field entirely (it will be auto-generated if needed)
+          - If you DO need cross-references/chaining, you MUST match this EXACT validation regex: /^aw_[0-9a-f]{12}$/i
+          - Format: aw_ prefix followed by EXACTLY 12 hexadecimal characters (0-9, a-f, case-insensitive)
+          - Valid hex characters ONLY: 0123456789abcdef (lowercase or uppercase)
+          - INVALID examples: aw_bundle000004 (contains 'u', 'n', 'l' which are NOT hex), aw_issue_001 (contains '_' and non-hex), aw_npm123 (too short)
+          - VALID examples: aw_abc123def456, aw_000011112222, aw_deadbeef9876, aw_1a2b3c4d5e6f
+          - To generate valid IDs: use exactly 12 random hex digits or omit the field to let the system auto-generate
+          
+          Do NOT invent other aw_* formats — downstream steps will reject them with validation errors matching against /^aw_[0-9a-f]{12}$/i.
           
           Discover available tools from the safeoutputs MCP server.
           
@@ -1032,7 +1043,7 @@ jobs:
       total_count: ${{ steps.missing_tool.outputs.total_count }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent output artifact
@@ -1139,7 +1150,7 @@ jobs:
       success: ${{ steps.parse_results.outputs.success }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent artifacts
@@ -1234,7 +1245,7 @@ jobs:
       activated: ${{ steps.check_membership.outputs.is_team_member == 'true' }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
       - name: Check team membership for workflow
@@ -1271,7 +1282,7 @@ jobs:
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@74c44cada5c44b6149ac584a274bc78bf2679cdb # 74c44cada5c44b6149ac584a274bc78bf2679cdb
+        uses: github/gh-aw/actions/setup@eab0427db18d90ce4c3acda0f70e6ee721aa7eba # eab0427db18d90ce4c3acda0f70e6ee721aa7eba
         with:
           destination: /opt/gh-aw/actions
           safe-output-projects: 'true'
