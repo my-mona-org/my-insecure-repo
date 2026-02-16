@@ -4,5 +4,5 @@ gem 'rails', '5.1.5'
 gem 'rack', '2.0.4'
 gem 'nokogiri', '1.8.2'
 gem 'actionpack', '5.1.5'
-gem 'ffi', '1.9.21'
+gem 'ffi', '1.17.3'
 
