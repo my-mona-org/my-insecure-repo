@@ -22,7 +22,7 @@
 # For more information: https://github.github.com/gh-aw/introduction/overview/
 #
 #
-# frontmatter-hash: 968e7e9e5bac57b4c7ca4671ba486cf5a3e0256b877d777ed199c3f9fdcf56c1
+# frontmatter-hash: f4588bcce498dcc2e1abb44fd2100398e33eb39f786c04fac26f03f914dbc7e3
 
 name: "Dependabot Burner"
 "on":
@@ -457,7 +457,7 @@ jobs:
                   "GITHUB_LOCKDOWN_MODE": "$GITHUB_MCP_LOCKDOWN",
                   "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_MCP_SERVER_TOKEN}",
                   "GITHUB_READ_ONLY": "1",
-                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests"
+                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests,projects"
                 }
               },
               "safeoutputs": {
