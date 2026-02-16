@@ -6,7 +6,7 @@
     "express": "4.16.3",
     "lodash": "4.17.11",
     "axios": "0.18.0",
-    "body-parser": "1.18.2",
+    "body-parser": "2.2.2",
     "qs": "6.5.1"
   },
   "devDependencies": {
