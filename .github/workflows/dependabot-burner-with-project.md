@@ -20,7 +20,8 @@ safe-outputs:
 ---
 # Dependabot Burner (with Projects)
 
-- Add all open Dependabot PRs to the project board under “Todo.”
-- Create bundle issues grouped by runtime + manifest (max 5 PRs each, security separate, no duplicates); explain the grouping briefly and list PRs in merge order (patch/minor → major).
-- Add bundle issues to the project board under “Review Required.”
+- Add all open Dependabot PRs to the project board under “Todo”.
+- Create bundle issues grouped by runtime + manifest (max 5 PRs each, security separate, no duplicates).
+- Explain the grouping briefly and list PRs in merge order (patch/minor → major).
+- Add bundle issues to the project board under “Review Required”. 
 - Post a status update with PR counts: open, merged/closed since last update, remaining.
