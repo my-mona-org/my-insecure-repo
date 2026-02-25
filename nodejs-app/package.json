@@ -7,7 +7,7 @@
     "lodash": "4.17.11",
     "axios": "0.18.0",
     "body-parser": "1.18.2",
-    "qs": "6.5.1"
+    "qs": "6.15.0"
   },
   "devDependencies": {
     "minimist": "1.2.0"
