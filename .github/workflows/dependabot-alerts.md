@@ -7,7 +7,7 @@ permissions:
   security-events: read
 tools:
   github:
-    toolsets: [default]
+    toolsets: [dependabot]
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-alerts] '
