@@ -9,7 +9,7 @@ tools:
   github:
     toolsets: [dependabot]
 app:
-  app-id: ${{ secrets.APP_ID }}
+  app-id: ${{ vars.APP_ID }}
   private-key: ${{ secrets.APP_PRIVATE_KEY }}
 safe-outputs:
   create-issue:
