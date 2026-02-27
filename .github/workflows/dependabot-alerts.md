@@ -8,7 +8,9 @@ permissions:
 tools:
   github:
     toolsets: [dependabot]
-    github-token: ${{ secrets.DEPENDABOT_ALERTS_TOKEN }}
+app:
+  app-id: ${{ secrets.APP_ID }}
+  private-key: ${{ secrets.APP_PRIVATE_KEY }}
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-alerts] '
