@@ -8,6 +8,7 @@ permissions:
 tools:
   github:
     toolsets: [dependabot]
+    github-token: ${{ secrets.DEPENDABOT_ALERTS_TOKEN }}
 safe-outputs:
   create-issue:
     title-prefix: '[dependabot-alerts] '
